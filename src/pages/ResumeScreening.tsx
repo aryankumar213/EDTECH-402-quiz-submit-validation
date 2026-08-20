@@ -13,7 +13,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
 import DashboardNavbar from '@/components/DashboardNavbar';
 import { useUser } from '@/contexts/UserContext';
-
+import { LearnerProgressBadge } from '@/components/LearnerProgressBadge/LearnerProgressBadge';
 interface SectionAnalysis {
   name: string;
   score: number;
@@ -89,7 +89,13 @@ const ResumeScreening = () => {
   const [skillGapAnalysis, setSkillGapAnalysis] = useState<SkillGapAnalysis | null>(null);
 
   const [isParsing, setIsParsing] = useState(false);
-
+const analysisStatus = isAnalyzing
+  ? 'in-progress'
+  : analysis
+    ? 'completed'
+    : !resumeText.trim()
+      ? 'disabled'
+      : 'default';
   const handleFileUpload = useCallback(async (file: File) => {
     if (file.type === 'text/plain') {
       const reader = new FileReader();
@@ -288,7 +294,11 @@ const ResumeScreening = () => {
             className="max-w-4xl mx-auto"
           >
             <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2">AI Resume Screening</h1>
-            <p className="text-muted-foreground mb-8">Get detailed ATS analysis and improvement suggestions for your resume</p>
+            <p className="text-muted-foreground mb-6">Get detailed ATS analysis and improvement suggestions for your resume</p>
+
+<div className="mb-6">
+  <LearnerProgressBadge state={analysisStatus} />
+</div>
 
             {!analysis ? (
               <Card className="glass-card p-6 md:p-8">
