@@ -10,6 +10,7 @@ const navLinks = [
   { name: 'Features', href: '#features' },
   { name: 'Journey', href: '#journey' },
   { name: 'About', href: '#about' },
+  { name: 'Quiz', href: '/quiz' },
 ];
 
 const LandingNavbar = () => {
@@ -42,6 +43,11 @@ const LandingNavbar = () => {
   }, []);
 
   const scrollToSection = (href: string) => {
+    if (href === '/quiz') {
+    navigate('/quiz');
+    setIsMobileMenuOpen(false);
+    return;
+  }
     const id = href.replace('#', '');
     const element = document.getElementById(id);
     if (element) {
@@ -76,7 +82,7 @@ const LandingNavbar = () => {
                 <Sparkles className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl text-primary">
-                AI Career<span className="text-secondary">Nav</span>
+                AI Career<span className="text-[#1e3a5f]">Nav</span>
               </span>
             </Link>
 

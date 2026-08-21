@@ -257,6 +257,7 @@ const ResourceChat = () => {
                     onClick={() => sendMessage()}
                     disabled={isLoading || !input.trim()}
                     className="btn-primary"
+                    aria-label={isLoading ? "Sending message" : "Send message"}
                   >
                     {isLoading ? (
                       <Loader2 className="w-4 h-4 animate-spin" />

@@ -12,6 +12,7 @@ import ResumeBuilder from "./pages/ResumeBuilder";
 import ResourceChat from "./pages/ResourceChat";
 import SkillGap from "./pages/SkillGap";
 import JobMatching from "./pages/JobMatching";
+import Quiz from "./pages/Quiz";
 import Dashboard from "./pages/Dashboard";
 import ResumesCreated from "./pages/dashboard/ResumesCreated";
 import ResumesUploaded from "./pages/dashboard/ResumesUploaded";
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/resources" element={<ResourceChat />} />
               <Route path="/skill-gap" element={<SkillGap />} />
               <Route path="/jobs" element={<JobMatching />} />
+              <Route path="/quiz" element={<Quiz />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/dashboard/resumes/created" element={<ResumesCreated />} />
               <Route path="/dashboard/resumes/uploaded" element={<ResumesUploaded />} />

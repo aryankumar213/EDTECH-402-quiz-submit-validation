@@ -97,6 +97,7 @@ const DashboardSidebar = () => {
         
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
+          aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           className="p-2 rounded-lg hover:bg-muted transition-colors"
         >
           {isCollapsed ? (

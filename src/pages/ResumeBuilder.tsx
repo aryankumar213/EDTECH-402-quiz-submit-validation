@@ -357,6 +357,7 @@ const ResumeBuilder = () => {
                 size="sm"
                 onClick={() => setShowPreview(!showPreview)}
                 className="md:hidden"
+                aria-label={showPreview ? "Hide preview" : "Show preview"}
               >
                 {showPreview ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </Button>
@@ -493,6 +494,7 @@ const ResumeBuilder = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => removeExperience(exp.id)}
+                            aria-label={`Remove Experience ${index + 1}`}
                           >
                             <Trash2 className="w-4 h-4 text-destructive" />
                           </Button>

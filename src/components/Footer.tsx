@@ -43,14 +43,15 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Connect</h4>
             <div className="flex gap-4">
               {[
-                { icon: Linkedin, href: '#' },
-                { icon: Twitter, href: '#' },
-                { icon: Github, href: '#' },
-                { icon: Mail, href: '#' },
+               { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Twitter, href: '#', label: 'Twitter' },
+  { icon: Github, href: '#', label: 'GitHub' },
+  { icon: Mail, href: '#', label: 'Email' },
               ].map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
+                   aria-label={social.label}
                   className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center hover:bg-secondary hover:text-primary transition-all"
                 >
                   <social.icon className="w-5 h-5" />

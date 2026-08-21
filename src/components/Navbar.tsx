@@ -42,7 +42,7 @@ const Navbar = () => {
               <Sparkles className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-bold text-xl text-primary">
-              AI Career<span className="text-secondary">Nav</span>
+              AI Career<span className="text-[#1e3a5f]">Nav</span>
             </span>
           </Link>
 
@@ -76,6 +76,7 @@ const Navbar = () => {
           <button
             className="md:hidden p-2 text-primary"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>

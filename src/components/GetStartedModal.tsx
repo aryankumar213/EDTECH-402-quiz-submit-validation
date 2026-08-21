@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, ArrowRight, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -16,9 +16,51 @@ interface GetStartedModalProps {
 const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const firstFocusableRef = useRef<HTMLInputElement>(null);
+  const lastFocusableRef = useRef<HTMLButtonElement>(null);
+
   const navigate = useNavigate();
   const { setUserProfile } = useUser();
   const { toast } = useToast();
+  useEffect(() => {
+  const handleEscape = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      onClose();
+    }
+  };
+
+  if (isOpen) {
+    window.addEventListener('keydown', handleEscape);
+  }
+
+  return () => {
+    window.removeEventListener('keydown', handleEscape);
+  };
+}, [isOpen, onClose]);
+useEffect(() => {
+  const handleTabKey = (event: KeyboardEvent) => {
+    if (!isOpen || event.key !== 'Tab') return;
+
+    const firstFocusable = firstFocusableRef.current;
+    const lastFocusable = lastFocusableRef.current;
+
+    if (!firstFocusable || !lastFocusable) return;
+
+    if (event.shiftKey && document.activeElement === firstFocusable) {
+      event.preventDefault();
+      lastFocusable.focus();
+    } else if (!event.shiftKey && document.activeElement === lastFocusable) {
+      event.preventDefault();
+      firstFocusable.focus();
+    }
+  };
+
+  window.addEventListener('keydown', handleTabKey);
+
+  return () => {
+    window.removeEventListener('keydown', handleTabKey);
+  };
+}, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,6 +148,7 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                     <Input
                       id="name"
+                      ref={firstFocusableRef}
                       type="text"
                       placeholder="Enter your name"
                       value={name}
@@ -117,6 +160,7 @@ const GetStartedModal = ({ isOpen, onClose }: GetStartedModalProps) => {
                 </div>
 
                 <Button
+                 ref={lastFocusableRef}
                   type="submit"
                   disabled={isLoading}
                   className="w-full btn-primary flex items-center justify-center gap-2"
